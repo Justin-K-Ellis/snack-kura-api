@@ -20,7 +20,11 @@ async function getMakerById(req, res) {
         id,
       },
     });
-    res.json(maker);
+    if (!maker) {
+      res.status(404).json({ message: "This maker does not exist." });
+    } else {
+      res.json(maker);
+    }
   } catch (error) {
     res.status(500).json({ message: `Failed to get maker by ID: ${error}` });
   }
