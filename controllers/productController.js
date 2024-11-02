@@ -6,6 +6,7 @@ async function getAllProducts(req, res) {
   try {
     const allProducts = await prisma.product.findMany({
       select: {
+        id: true,
         name: true,
         quantity: true,
         category: true,
@@ -15,6 +16,13 @@ async function getAllProducts(req, res) {
     res.json(allProducts);
   } catch (error) {
     res.status(500).json({ message: `Failed to get all products: ${error}` });
+  }
+}
+
+async function getProductById(req, res) {
+  try {
+  } catch (error) {
+    res.status(500).json({ message: `Failed to get product by ID: ${error}` });
   }
 }
 

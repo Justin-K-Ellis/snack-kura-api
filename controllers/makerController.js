@@ -11,6 +11,21 @@ async function getAllMakers(req, res) {
   }
 }
 
+async function getMakerById(req, res) {
+  let { makerId } = req.params;
+  id = parseInt(makerId);
+  try {
+    const maker = await prisma.maker.findUnique({
+      where: {
+        id,
+      },
+    });
+    res.json(maker);
+  } catch (error) {
+    res.status(500).json({ message: `Failed to get maker by ID: ${error}` });
+  }
+}
+
 // POST
 async function postMaker(req, res) {
   const { name } = req.body;
@@ -29,12 +44,25 @@ async function postMaker(req, res) {
 }
 
 // PUT
-async function updateMaker(req, res) {
-  res.json("Coming soon");
+async function updateMakerName(req, res) {
+  const { makerId, newName } = req.body;
+  console.log(makerId, newName);
+  try {
+    const update = await prisma.maker.update({
+      where: {
+        id: makerId,
+      },
+      data: {
+        name: newName,
+      },
+    });
+    res.json(update);
+  } catch (error) {
+    res.status(500).json({ message: `Failed to update name: ${error}` });
+  }
 }
 
 // DELETE
-
 async function deleteMaker(req, res) {
   const { makerId } = req.body;
   try {
@@ -49,4 +77,10 @@ async function deleteMaker(req, res) {
   }
 }
 
-module.exports = { getAllMakers, postMaker, updateMaker, deleteMaker };
+module.exports = {
+  getAllMakers,
+  getMakerById,
+  postMaker,
+  updateMakerName,
+  deleteMaker,
+};

@@ -11,8 +11,9 @@ router.get("/router-test", (req, res) => {
 
 // Makers
 router.get("/all-makers", makerController.getAllMakers);
+router.get("/maker/:id", makerController.getMakerById);
 router.post("/maker", makerController.postMaker);
-router.put("/maker", makerController.updateMaker);
+router.put("/maker", makerController.updateMakerName);
 router.delete("/maker", makerController.deleteMaker);
 
 // Product
