@@ -12,6 +12,9 @@ async function getAllProducts(req, res) {
         category: true,
         maker: true,
       },
+      orderBy: {
+        id: "asc",
+      },
     });
     res.json(allProducts);
   } catch (error) {
@@ -86,10 +89,26 @@ async function updateProductQuant(req, res) {
   }
 }
 
+// DELETE
+async function deleteProduct(req, res) {
+  const { id } = req.body;
+  try {
+    const deletedId = await prisma.product.delete({
+      where: { id },
+    });
+    res.json(deletedId);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: `Failed to delete product ${id}: ${error}` });
+  }
+}
+
 module.exports = {
   getAllProducts,
   getProductById,
   createProduct,
   updateProductName,
   updateProductQuant,
+  deleteProduct,
 };
