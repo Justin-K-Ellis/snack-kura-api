@@ -57,4 +57,39 @@ async function createProduct(req, res) {
   }
 }
 
-module.exports = { getAllProducts, getProductById, createProduct };
+// PUT
+async function updateProductName(req, res) {
+  const { name, id } = req.body;
+  try {
+    const updatedName = await prisma.product.update({
+      where: { id },
+      data: { name },
+    });
+    res.json(updatedName);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: `Failed to update product name: ${error}` });
+  }
+}
+
+async function updateProductQuant(req, res) {
+  const { id, newQuantity } = req.body;
+  try {
+    const update = await prisma.product.update({
+      where: { id },
+      data: { quantity: newQuantity },
+    });
+    res.json(update);
+  } catch (error) {
+    res.status(500).json(`Failed to update product quantity: ${error}`);
+  }
+}
+
+module.exports = {
+  getAllProducts,
+  getProductById,
+  createProduct,
+  updateProductName,
+  updateProductQuant,
+};

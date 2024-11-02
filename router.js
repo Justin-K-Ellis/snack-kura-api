@@ -20,6 +20,8 @@ router.delete("/maker", makerController.deleteMaker);
 router.get("/all-products", productController.getAllProducts);
 router.get("/product/:id", productController.getProductById);
 router.post("/product", productController.createProduct);
+router.put("/product/name", productController.updateProductName);
+router.put("/product/quantity", productController.updateProductQuant);
 
 // Category
 router.get("/all-categories", categoryController.getAllCategories);

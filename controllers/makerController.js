@@ -12,8 +12,8 @@ async function getAllMakers(req, res) {
 }
 
 async function getMakerById(req, res) {
-  let { makerId } = req.params;
-  id = parseInt(makerId);
+  let { id } = req.params;
+  id = parseInt(id);
   try {
     const maker = await prisma.maker.findUnique({
       where: {
