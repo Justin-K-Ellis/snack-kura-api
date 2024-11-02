@@ -32,4 +32,17 @@ async function createCategory(req, res) {
   }
 }
 
-module.exports = { getAllCategories, createCategory };
+// DELETE
+async function deleteCategory(req, res) {
+  const { id } = req.body;
+  try {
+    const deletedCategory = await prisma.category.delete({
+      where: { id },
+    });
+    res.json(deletedCategory);
+  } catch (error) {
+    res.status(500).json(`Failed to delete category ${id}: ${error}`);
+  }
+}
+
+module.exports = { getAllCategories, createCategory, deleteCategory };

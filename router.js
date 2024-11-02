@@ -23,5 +23,6 @@ router.delete("/product", productController.deleteProduct);
 // Categories
 router.get("/all-categories", categoryController.getAllCategories);
 router.post("/category", categoryController.createCategory);
+router.delete("/category", categoryController.deleteCategory);
 
 module.exports = router;
